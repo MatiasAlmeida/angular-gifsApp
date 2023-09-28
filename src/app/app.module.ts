@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 // orden por jerarquia: modulos primero, componentes despues
 import { GifsModule } from './gifs/gifs.module';
@@ -13,8 +14,9 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     GifsModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
