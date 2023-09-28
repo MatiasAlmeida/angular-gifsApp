@@ -27,7 +27,7 @@ export class GifsService {
     this._tagsHistory = this._tagsHistory.splice(0, 10);
   }
 
-  // public async searchTag( tag: string ): Promise<void> {
+  // public async searchTag( tag: string ): Promise<void> { // con fetch
   public searchTag( tag: string ): void {
     if ( tag.length === 0) return;
     this.organizeHistory(tag);
