@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Gif, SearchResponse } from '../interfaces/gifs.interfaces';
 
 const GIPHY_API_KEY: string = '35qK9zfVRyTFVLv0xt6H7nCUdyVfxVOT';
 
 @Injectable({providedIn: 'root'})
 export class GifsService {
+  public gifList: Gif[] = [];
   private _tagsHistory: string[] = [];
   private serviceUrl: string = 'https://api.giphy.com/v1/gifs';
 
@@ -34,16 +36,15 @@ export class GifsService {
     //   .then( response => response.json() )
     //   .then( data => console.log(data));
     // console.log(this._tagsHistory);
-    // TODO: save 'api_key' value inside a file that will be excluded from repo
     const params = new HttpParams()
       .set('api_key', GIPHY_API_KEY)
       .set('limit', 10)
       .set('q', tag);
 
-    // TODO: hacer commit luego de terminar los videos de peticiones HTTP
-    this.http.get(`${this.serviceUrl}/search`, { params })
+    this.http.get<SearchResponse>(`${this.serviceUrl}/search`, { params })
       .subscribe( resp => {
-        console.log(resp);
+        this.gifList = resp.data;
+        console.log({ gifs: this.gifList });
       });
   }
 }
